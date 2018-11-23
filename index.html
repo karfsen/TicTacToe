@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="css/css.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/javascript.js" charset="utf-8"></script>
+    <link rel="icon" href="img/ttt.jpg" type="image/gif" sizes="16x16">
     <title>TIC TAC TOE</title>
   </head>
   <body>
@@ -26,21 +27,8 @@
               <td><img src="img/empty.jpg"  name="image" onclick="imgClick(8)"></td>
          </tr>
        </table>
-       <button onclick="start()" id="newGame">NEW GAME</button>
-       <button onclick="apply()" id="apply" disabled>APPLY NAMES</button>
-       <button onclick="restart()">RESTART</button>
-       <table class="score">
-       	<caption>On Turn</caption>
-       		<tr>
-       			<th>Player name</th><th>Score</th>
-       		</tr>
-       		<tr>
-       			<td name='nameP1'></td><td name='scoreP1'></td>
-       		</tr>
-       		<tr>
-       			<td name='nameP2'></td><td name='scoreP2'></td>
-       		</tr>
-       </table>
+      <div id="player">next player X</div>
      </div>
+     <button onclick="resetGame()"> RESET</button>
   </body>
 </html>

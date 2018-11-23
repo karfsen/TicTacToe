@@ -1,55 +1,96 @@
-let board=[
-			[0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0]
-		  ];
+let board=[0,0,0,0,0,0,0,0,0];
+let player=1;
+let winner=0;
 
 $(document).ready(function() {
 
 });
 
-let countTurn=1;
-let x;
+//funkcia zaregistruje kliknutie na biely obrazok na obrazovke
 function imgClick(index){
-  	x=document.getElementsByName('image')[index];
-  	checkingTurn(index);
+  console.log(index);
+
+  if(board[index]===0 && winner===0){
+    board[index]=player;
+
+
+    if(player===1)
+        paintCell('img/x.jpg',index);
+    else
+        paintCell('img/0.jpg',index);
+    changePlayer();
+    setTimeout(checkWinner,500);
+  }
+
 }
 
-let currentPlayer;
-function checkingTurn(index){
+//funkcia zmeni obrazok polička
+function paintCell(imagexo,index){
+  let image=document.getElementsByName('image')[index].src=imagexo;
 
-	if(countTurn==2){
-  					if(board[1][index]==0 &&board[0][index]==0){
+}
 
-  					x.setAttribute("src","img/x.i,g");
-  					currentPlayer=document.getElementsByName('nameP1')[0];
-  					currentPlayer.setAttribute("bgcolor","white");
-  					currentPlayer=document.getElementsByName('nameP2')[0];
-  					currentPlayer.setAttribute("bgcolor","red");
+//funkcia zmeni hrača
+function changePlayer(){
+  player=player===1?2:1;
+  let playerDiv=document.getElementById('player');
+  if(player===1)
+    playerDiv.innerHTML='Next player: X';
+   else
+      playerDiv.innerHTML='Next player: O';
+
+}
+
+//funkcia čekne kto vyhral
+function checkWinner(){
+  let t =0;
+  for(i=0;i<7;i=i+3){
+    t=board[i]*board[i+1]*board[i+2];
+    if(t==1)
+        winner=1;
+    if(t==8)
+        winner=2;
+  }
 
 
-						board[1][index]=1;
-						countTurn=1;
-						checkResulPtwo();
+  for(i=0;i<3;i++){
+    t=board[i]*board[i+3]*board[i+6];
+    if(t==1)
+          winner=1;
+    if(t==8)
+          winner=2;
+  }
 
-					}else{
-						alert("Acces denied!!!");
-					}
-  	}else{
-  					if(board[0][index]==0 &&board[1][index]==0){
 
-  					x.setAttribute("src","img/.img");
-  					currentPlayer=document.getElementsByName('nameP2')[0];
-  					currentPlayer.setAttribute("bgcolor","white");
-  					currentPlayer=document.getElementsByName('nameP1')[0];
-  					currentPlayer.setAttribute("bgcolor","red");
+  t=board[0]*board[4]*board[8];
 
-						board[0][index]=1;
-						countTurn=2;
-						checkResulPone();
+  if(t==1)
+        winner=1;
+  if(t==8)
+        winner=2;
 
-					}else{
-						alert("Acces denied!!!");
-					}
-  	}
 
+  t=board[2]*board[4]*board[6];
+      if(t==1)
+            winner=1;
+      if(t==8)
+            winner=1;
+
+
+
+   if(winner==1)
+      alert('X is winner !');
+   if(winner==2)
+         alert('O is winner !');
+
+}
+
+//funkcia zresetuje obrazky a začne novu hru
+function resetGame(){
+  winner=0;
+  player=1;
+  for(i=0;i<9;i++){
+    board[i]=0;
+    paintCell('img/empty.jpg',i);
+  }
 }
