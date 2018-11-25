@@ -2,9 +2,12 @@ let board=[0,0,0,0,0,0,0,0,0];
 let player=1;
 let winner=0;
 
+
 $(document).ready(function() {
 
+
 });
+
 
 //funkcia zaregistruje kliknutie na biely obrazok na obrazovke
 function imgClick(index){
